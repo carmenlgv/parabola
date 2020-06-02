@@ -5,8 +5,17 @@ function asignaEcuacion() {
     this.num = randomInt(40, -40);
     this.intentos = 0;
     ecuacion.value = this.eje2 + "²=" + this.num + this.eje;
+    inicializar();
+}
+function inicializar(){
     let resultado = getResultado();
     resultado.innerHTML = "";
+    let foco = getFoco();
+    foco.value="";
+    let directriz = getDirectriz();
+    directriz.value="";
+    let ladoRecto= getLadoRecto();
+    ladoRecto.value="";
 }
 function randomInt(min, max) {
     let num = Math.floor(Math.random() * (max + 1 - min)) + min;
