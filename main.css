@@ -1,0 +1,21 @@
+body{
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.content,.datos{
+    width: 80%;
+}
+input{
+    width: 95px;
+}
+label{
+    display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+#resultado{
+    color:red;
+}
+.name{
+    width: 90%;
+}
