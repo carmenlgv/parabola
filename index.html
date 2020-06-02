@@ -15,7 +15,8 @@
         <label for="">Grupo:</label>
         <input type="text">
         <p>Instrucciones:<br>
-            Escribe las características de la parábola según la ecuación dada.
+            Escribe las coordenadas del vértice, del foco, la ecuación de la directriz y 
+            la medida del lado recto según la ecuación dada.
         </p>
     </div>
 
@@ -24,13 +25,13 @@
         <label for="">Ecuación:
         <input type="text" name="" id="ecuacion" disabled></label>
         <label for="">Vértice:
-        <input type="text" name="" id="vertice" disabled value="(0,0)"></label>
+        <input type="text" name="" id="vertice" disabled ></label>
         <label for="">Foco:
-        <input type="text" name="" id="foco" placeholder="(0,0)" required></label>
+        <input type="text" name="" id="foco" required></label>
         <label for="">Directriz:
-        <input type="text" name="" id="directriz" placeholder="y=0" required></label>
+        <input type="text" name="" id="directriz" required></label>
         <label for="">Lado Recto:
-        <input type="number" name="" id="ladoRecto" placeholder="00"></label>
+        <input type="number" name="" id="ladoRecto"></label>
         <input type="button" onclick="valida()" value="Verificar">
         <input type="button" onclick="asignaEcuacion()" value="Otra ecuación">
         <p id=resultado></p>

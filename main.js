@@ -33,11 +33,16 @@ function otroEje(eje) {
 
 function valida() {
     let error = formatoFoco() && formatoDirectriz() ? 
-                validaFoco(this.num):
+                validaVertice():
                 "Llena todos los campos con el formato correcto";
     this.intentos += 1;
     let resultado = getResultado();
     resultado.innerHTML = this.intentos+error;
+}
+
+function validaVertice(){
+    let vertice = getVertice();
+    let error = !validaIgual(vertice,"(0,0)")?"Escribe bien el vértice":validaFoco(this.num);
 }
 
 function validaFoco(num) {
@@ -81,6 +86,9 @@ function getLadoRecto() {
 }
 function getResultado() {
     return document.getElementById("resultado");
+}
+function getVertice() {
+    return document.getElementById("vertice");
 }
 function formatoFoco(){
     let regExp = new RegExp('([0-9],[0-9])');
