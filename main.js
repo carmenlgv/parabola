@@ -42,7 +42,7 @@ function valida() {
 
 function validaVertice(){
     let vertice = getVertice();
-    let error = !validaIgual(vertice,"(0,0)")?"Escribe bien el vértice":validaFoco(this.num);
+    let error = !validaIgual(vertice.value,"(0,0)")?"Escribe bien el vértice":validaFoco(this.num);
     return error;
 }
 
