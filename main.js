@@ -66,7 +66,8 @@ function validaDirectriz(num) {
     return error;
 }
 function validaLadoRecto(num) {
-    let error = !validaIgual(Math.abs(num), getLadoRecto()) ? "El lado recto es 4 veces el foco" : "¡Correcto!";
+    let ladoRecto = getLadoRecto();
+    let error = !validaIgual(Math.abs(num), ladoRecto.value) ? "El lado recto es 4 veces el foco" : "¡Correcto!";
     return error;
 }
 function validaIgual(x, y) {
@@ -83,7 +84,7 @@ function getDirectriz() {
     return document.getElementById("directriz");
 }
 function getLadoRecto() {
-    return document.getElementById("ladoRecto").value;
+    return document.getElementById("ladoRecto");
 }
 function getResultado() {
     return document.getElementById("resultado");

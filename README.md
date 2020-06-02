@@ -1,4 +1,4 @@
-Parábola
+Parábola con vértice en el origen
 
 Ejercicios para practicar sobre el tema: Parábola
 
