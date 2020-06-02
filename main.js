@@ -16,6 +16,8 @@ function inicializar(){
     directriz.value="";
     let ladoRecto= getLadoRecto();
     ladoRecto.value="";
+    let vertice= getVertice();
+    vertice.value="";
 }
 function randomInt(min, max) {
     let num = Math.floor(Math.random() * (max + 1 - min)) + min;
@@ -49,12 +51,10 @@ function validaVertice(){
 function validaFoco(num) {
     num = num / 4;
     let foco = getFoco();
-    foco = foco.value.split(/[(),]/);
-    let foco2 = this.eje2 == 'x' ? foco[1] : foco[2];
-    foco = this.eje2 == 'x' ? foco[2] : foco[1];
-    let error = !validaIgual(foco2,0) && !validaIgual(num, foco) ?
-                "Para obtener el foco divide el lado recto entre 4":
-                validaDirectriz(num);
+    let focoC = this.eje2 == 'x' ? "(0,"+num+")" : "("+num+",0)";
+    let error = !validaIgual(focoC,foco.value) ?
+    "Para obtener el foco divide el lado recto entre 4":
+    validaDirectriz(num);
     return error;
 }
 function validaDirectriz(num) {
@@ -98,7 +98,7 @@ function formatoFoco(){
     return res;
 }
 function formatoDirectriz(){
-    let regExp = new RegExp('((x|y)=[0-9])');
+    let regExp = new RegExp('((x|y|X|Y)=[0-9])');
     let directriz = getDirectriz();
     let res = directriz.value == ""&& !regExp.test(directriz.value)?false:true;
     return res;
