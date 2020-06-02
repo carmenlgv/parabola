@@ -44,7 +44,9 @@ function valida() {
 
 function validaVertice(){
     let vertice = getVertice();
-    let error = !validaIgual(vertice.value,"(0,0)")?"Escribe bien el vértice":validaFoco(this.num);
+    let error = !validaIgual(vertice.value,"(0,0)")?
+                "Vértice incorrecto, vuelve a intentarlo":
+                validaFoco(this.num);
     return error;
 }
 
@@ -53,21 +55,23 @@ function validaFoco(num) {
     let foco = getFoco();
     let focoC = this.eje2 == 'x' ? "(0,"+num+")" : "("+num+",0)";
     let error = !validaIgual(focoC,foco.value) ?
-    "Para obtener el foco divide el lado recto entre 4":
-    validaDirectriz(num);
+                "Foco incorrecto, vuelve a intentarlo":
+                validaDirectriz(num);
     return error;
 }
 function validaDirectriz(num) {
     num = num - num - num;
     let directriz = getDirectriz();
     let error = !validaIgual(this.eje + "=" + num, directriz.value) ?
-                 "La directriz es el foco con el signo contrario" : 
+                 "Directriz incorrecta, vuelve a intentarlo" : 
                  validaLadoRecto(this.num);
     return error;
 }
 function validaLadoRecto(num) {
     let ladoRecto = getLadoRecto();
-    let error = !validaIgual(Math.abs(num), ladoRecto.value) ? "El lado recto es 4 veces el foco" : "¡Correcto!";
+    let error = !validaIgual(Math.abs(num), ladoRecto.value) ? 
+                "Lado Recto incorrecto, vuelve a intentarlo" :
+                "¡Correcto!";
     return error;
 }
 function validaIgual(x, y) {
