@@ -68,7 +68,8 @@ function validaFoco(num) {
 function validaDirectriz(num) {
     num = num - num - num;
     let directriz = getDirectriz();
-    let error = !validaIgual(this.eje + "=" + num, directriz.value) ?
+    directriz = directriz.value.toLowerCase();
+    let error = !validaIgual(this.eje + "=" + num, directriz) ?
                  "Directriz incorrecta, vuelve a intentarlo" : 
                  validaLadoRecto(this.num);
     return error;
@@ -112,7 +113,7 @@ function formatoFoco(){
     return res;
 }
 function formatoDirectriz(){
-    let regExp = new RegExp('((x|y|X|Y)=[0-9])');
+    let regExp = new RegExp('((x|y)=[0-9])');
     let directriz = getDirectriz();
     let res = directriz.value == ""&& !regExp.test(directriz.value)?false:true;
     return res;
