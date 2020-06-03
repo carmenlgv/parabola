@@ -18,6 +18,8 @@ function inicializar(){
     ladoRecto.value="";
     let vertice= getVertice();
     vertice.value="";
+    let otra = getBotonOtra();
+    otra.hidden = true;
 }
 function randomInt(min, max) {
     let num = Math.floor(Math.random() * (max + 1 - min)) + min;
@@ -38,6 +40,10 @@ function valida() {
                 validaVertice():
                 "Llena todos los campos con el formato correcto";
     this.intentos += 1;
+    if (error == "¡Correcto!") {
+        let otra = getBotonOtra();
+        otra.hidden = false;
+    }
     let resultado = getResultado();
     resultado.innerHTML = this.intentos+error;
 }
@@ -95,6 +101,9 @@ function getResultado() {
 }
 function getVertice() {
     return document.getElementById("vertice");
+}
+function getBotonOtra() {
+    return document.getElementById("otra");
 }
 function formatoFoco(){
     let regExp = new RegExp('([0-9],[0-9])');
