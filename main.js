@@ -1,84 +1,108 @@
+//(x-h)^2=4p(y-k)
+//(y-k)^2=4p(x-h)
 function asignaEcuacion() {
     let ecuacion = getEcuacion();
     this.eje = randomEje();
     this.eje2 = otroEje(this.eje);
-    this.num = randomInt(40, -40);
+    this.p = randomInt(10, -10, 0);
+    this.h = randomInt(10, -10, 11);
+    this.k = randomInt(10, -10, 11);
     this.intentos = 0;
-    ecuacion.value = this.eje2 + "²=" + this.num + this.eje;
+    if (this.h == 0 && this.k == 0) {
+        ecuacion.value = this.eje2 + "²=" + (this.p * 4) + this.eje;
+    }
+    else if (this.h == 0) {
+        let knum = this.k <= 0 ? "+" + (this.k - this.k - this.k) : (this.k - this.k - this.k);
+        ecuacion.value = this.eje2 == 'x' ?
+            this.eje2 + "²=" + (this.p * 4) + "(" + this.eje + knum + ")" :
+            "(" + this.eje2 + knum + ")²=" + (this.p * 4) + this.eje;
+    }
+    else if (this.k == 0) {
+        let hnum = this.h <= 0 ? "+" + (this.h - this.h - this.h) : (this.h - this.h - this.h);
+        ecuacion.value = this.eje2 == 'x' ?
+            "(" + this.eje2 + hnum + ")²=" + (this.p * 4) + this.eje :
+            this.eje2 + "²=" + this.p * 4 + "(" + this.eje + hnum + ")";
+    }
+    else {
+        let hnum = this.h <= 0 ? "+" + (this.h - this.h - this.h) : (this.h - this.h - this.h);
+        let knum = this.k <= 0 ? "+" + (this.k - this.k - this.k) : (this.k - this.k - this.k);
+        ecuacion.value = this.eje2 == 'x' ?
+            "(" + this.eje2 + hnum + ")²=" + this.p * 4 + "(" + this.eje + knum + ")" :
+            "(" + this.eje2 + knum + ")²=" + this.p * 4 + "(" + this.eje + hnum + ")";
+    }
     inicializar();
 }
-function inicializar(){
+function inicializar() {
     let resultado = getResultado();
     resultado.innerHTML = "";
     let foco = getFoco();
-    foco.value="";
+    foco.value = "";
     let directriz = getDirectriz();
-    directriz.value="";
-    let ladoRecto= getLadoRecto();
-    ladoRecto.value="";
-    let vertice= getVertice();
-    vertice.value="";
+    directriz.value = "";
+    let ladoRecto = getLadoRecto();
+    ladoRecto.value = "";
+    let vertice = getVertice();
+    vertice.value = "";
     let otra = getBotonOtra();
     otra.hidden = true;
 }
-function randomInt(min, max) {
-    let num = Math.floor(Math.random() * (max + 1 - min)) + min;
-    num = num !== 0 && num % 4 == 0 ? num : randomInt(min, max);
-    return num;
+function randomInt(min, max, dif) {
+    let p = Math.floor(Math.random() * (max + 1 - min)) + min;
+    p = p !== dif ? p : randomInt(min, max);
+    return p;
 }
 function randomEje() {
     let eje = Math.floor(Math.random() * 2) === 1 ? 'x' : 'y';
     return eje;
 }
 function otroEje(eje) {
-    eje = eje === 'x' ? 'y' : 'x';
+    eje = eje == 'x' ? 'y' : 'x';
     return eje;
 }
 
 function valida() {
-    let error = formatoFoco() && formatoDirectriz() ? 
-                validaVertice():
-                "Llena todos los campos con el formato correcto";
+    let error = validaVertice();
     this.intentos += 1;
     if (error == "¡Correcto!") {
         let otra = getBotonOtra();
         otra.hidden = false;
     }
     let resultado = getResultado();
-    resultado.innerHTML = this.intentos+error;
+    resultado.innerHTML = this.intentos + error;
 }
 
-function validaVertice(){
+function validaVertice() {
     let vertice = getVertice();
-    let error = !validaIgual(vertice.value,"(0,0)")?
-                "Vértice incorrecto, vuelve a intentarlo":
-                validaFoco(this.num);
+    let error = !validaIgual(vertice.value, "(" + this.h + "," + this.k + ")") ?//k signo contrario
+        "Vértice incorrecto, vuelve a intentarlo" :
+        validaFoco();
     return error;
 }
 
-function validaFoco(num) {
-    num = num / 4;
+function validaFoco() {
+    let resp = this.eje2 == 'x' ?
+        "(" + this.h + "," + (this.k + this.p) + ")" :
+        "(" + (this.h + this.p) + "," + this.k + ")";
     let foco = getFoco();
-    let focoC = this.eje2 == 'x' ? "(0,"+num+")" : "("+num+",0)";
-    let error = !validaIgual(focoC,foco.value) ?
-                "Foco incorrecto, vuelve a intentarlo":
-                validaDirectriz(num);
+    let error = !validaIgual(resp, foco.value) ?
+        "Foco incorrecto, vuelve a intentarlo" :
+        validaDirectriz();
     return error;
 }
-function validaDirectriz(num) {
-    num = num - num - num;
+function validaDirectriz() {
+    let resp = this.eje2 == 'x' ? (this.k - this.p) : (this.h - this.p);
     let directriz = getDirectriz();
     directriz = directriz.value.toLowerCase();
-    let error = !validaIgual(this.eje + "=" + num, directriz) ?
-                 "Directriz incorrecta, vuelve a intentarlo" : 
-                 validaLadoRecto(this.num);
+    let error = !validaIgual(this.eje + "=" + resp, directriz) ?
+        "Directriz incorrecta, vuelve a intentarlo" :
+        validaLadoRecto(this.p * 4);
     return error;
 }
-function validaLadoRecto(num) {
+function validaLadoRecto(p) {
     let ladoRecto = getLadoRecto();
-    let error = !validaIgual(Math.abs(num), ladoRecto.value) ? 
-                "Lado Recto incorrecto, vuelve a intentarlo" :
-                "¡Correcto!";
+    let error = !validaIgual(Math.abs(p), ladoRecto.value) ?
+        "Lado Recto incorrecto, vuelve a intentarlo" :
+        "¡Correcto!";
     return error;
 }
 function validaIgual(x, y) {
@@ -105,16 +129,4 @@ function getVertice() {
 }
 function getBotonOtra() {
     return document.getElementById("otra");
-}
-function formatoFoco(){
-    let regExp = new RegExp('([0-9],[0-9])');
-    let foco =getFoco();
-    let res = foco.value == "" && !regExp.test(foco.value)?false:true;
-    return res;
-}
-function formatoDirectriz(){
-    let regExp = new RegExp('((x|y)=[0-9])');
-    let directriz = getDirectriz();
-    let res = directriz.value == ""&& !regExp.test(directriz.value)?false:true;
-    return res;
 }

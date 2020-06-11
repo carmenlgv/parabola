@@ -7,6 +7,7 @@ body{
 }
 input{
     width: 95px;
+    font-style: italic;
 }
 label{
     display: flex;
