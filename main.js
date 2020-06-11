@@ -1,6 +1,9 @@
 //(x-h)^2=4p(y-k)
 //(y-k)^2=4p(x-h)
 function asignaEcuacion() {
+    let fecha = getFecha();
+    let date = new Date();
+    fecha.value =date.getDate() + "/" + (date.getMonth() +1) + "/" + date.getFullYear();
     let ecuacion = getEcuacion();
     this.eje = randomEje();
     this.eje2 = otroEje(this.eje);
@@ -129,4 +132,7 @@ function getVertice() {
 }
 function getBotonOtra() {
     return document.getElementById("otra");
+}
+function getFecha() {
+    return document.getElementById("fecha");
 }
